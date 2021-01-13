@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Course;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ApprovedCourse;
+
 class CourseController extends Controller
 {
     public function index(){
@@ -34,6 +37,11 @@ class CourseController extends Controller
 
         $course->status = 3;
         $course->save();
+
+        //Envie el correo electronico
+        $mail = new ApprovedCourse($course);
+
+        Mail::to($course->teacher->email)->send($mail);
 
         return redirect()->route('admin.courses.index')->with('info', 'El curso se publicó con éxito');
     }
