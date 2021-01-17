@@ -9,6 +9,15 @@ use App\Models\Level;
 
 class LevelController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:Listar niveles')->only('index');
+        $this->middleware('can:Crear nivel')->only('create', 'store');
+        $this->middleware('can:Editar nivel')->only('edit', 'update');
+        $this->middleware('can:Eliminar nivel')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

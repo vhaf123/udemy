@@ -13,6 +13,17 @@ use App\Mail\RejectCourse;
 
 class CourseController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:Ver lista de cursos pendientes')->only('index');
+        $this->middleware('can:Ver curso pendiente')->only('show');
+        $this->middleware('can:Aprovar curso pendiente')->only('approved');
+        $this->middleware('can:Observar curso pendiente')->only('observation');
+        $this->middleware('can:Rechazar curso pendiente')->only('reject');
+    }
+
+
     public function index(){
 
         $courses = Course::where('status', 2)->paginate();

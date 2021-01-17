@@ -9,6 +9,15 @@ use App\Models\Price;
 
 class PriceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:Listar precios')->only('index');
+        $this->middleware('can:Crear precio')->only('create', 'store');
+        $this->middleware('can:Editar precio')->only('edit', 'update');
+        $this->middleware('can:Eliminar precio')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
