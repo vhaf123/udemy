@@ -82,6 +82,9 @@
                 </div>
             </section>
 
+
+            @livewire('review', ['course' => $course])
+
         </div>
 
         <div class="oder-1 lg:order-2">
@@ -137,4 +140,6 @@
             </aside>
         </div>
     </div>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
 </x-app-layout>
